@@ -3,12 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <title>Asian Paints Grid</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 30px;
+    }
+    #grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-template-rows: repeat(3, 100px);
+      gap: 10px;
+      justify-content: center;
+      margin: 20px auto;
+    }
+    .grid-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: transparent;
+      border: 2px solid #333;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    input, button {
+      margin: 5px;
+      padding: 8px;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
   <h1>Asian Paints Grid</h1>
 
-  <!-- Grid container -->
   <div id="grid-container">
+    <!-- 9 grid blocks -->
     <div class="grid-item" id="1">1</div>
     <div class="grid-item" id="2">2</div>
     <div class="grid-item" id="3">3</div>
@@ -26,5 +56,36 @@
   <br>
   <button id="change_button">Change Color</button>
   <button id="Reset">Reset</button>
+
+  <script>
+    const changeBtn = document.getElementById("change_button");
+    const resetBtn = document.getElementById("Reset");
+
+    changeBtn.addEventListener("click", () => {
+      const blockId = document.getElementById("block_id").value;
+      const colour = document.getElementById("colour_id").value;
+
+      // Reset all blocks to transparent
+      const blocks = document.querySelectorAll(".grid-item");
+      blocks.forEach(block => {
+        block.style.backgroundColor = "transparent";
+      });
+
+      // Change selected block's color if valid
+      const selectedBlock = document.getElementById(blockId);
+      if (selectedBlock) {
+        selectedBlock.style.backgroundColor = colour;
+      } else {
+        alert("Please enter a valid Block ID between 1 and 9.");
+      }
+    });
+
+    resetBtn.addEventListener("click", () => {
+      const blocks = document.querySelectorAll(".grid-item");
+      blocks.forEach(block => {
+        block.style.backgroundColor = "transparent";
+      });
+    });
+  </script>
 </body>
 </html>
